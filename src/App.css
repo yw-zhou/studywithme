@@ -34,9 +34,20 @@
   width: 65%;
 }
 
-.title-page-centre > *,
-.title-page-centre div button {
-  margin: 10px;
+.title-page-centre .card {
+  max-width: 400px;
+  margin: auto;
+}
+
+.input-label {
+  color: #5d6779;
+  font-size: 16px;
+  font-weight: 700;
+  float: left;
+}
+
+.title-page-centre .d-flex > * {
+  margin: 0px;
 }
 
 #main-title {
