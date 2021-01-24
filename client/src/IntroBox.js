@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from 'axios';
 
 class IntroBox extends Component {
     state = {
@@ -9,7 +10,10 @@ class IntroBox extends Component {
             if (this.state.password !== this.state.verify) {
                 return
             }
-            fetch("http://localhost:9000/testAPI").then(res => console.log(res.text()))
+            const user = { email: this.state.email, password: this.state.password }
+            console.log(user)
+            axios.post("http://localhost:9000/createUser", {user}).then(res => console.log(res))
+            // axios.get("http://localhost:9000/testAPI").then(res => console.log(res))
         }
         
     }
@@ -32,12 +36,12 @@ class IntroBox extends Component {
                 <div className="card">
                     <div className="card-body">
                         <h5 className="card-title mb-2 text-muted">{this.state.mode}</h5>
-                        <label for="email" className="input-label">Email</label>
+                        <label className="input-label">Email</label>
                         <div className="input-group mb-1">
                             <input onChange={this.handlechange.bind(this)} type="text" className="form-control" id="email" aria-label="Email" aria-describedby="basic-addon2" />
                         </div>
                         <div className="d-flex justify-content-between align-items-center">
-                            <label for="password" className="input-label">Password</label>
+                            <label className="input-label">Password</label>
                             {this.state.mode === 'LOG IN' ? <button type="button" className="btn btn-link">Forgot Password?</button> : null}
                         </div>
                         <div className="input-group mb-1">
@@ -45,13 +49,13 @@ class IntroBox extends Component {
                         </div>
                         {this.state.mode === 'SIGN UP' ?
                             (<div>
-                                <label for="verify" className="input-label m-0">Verify Password</label>
+                                <label className="input-label m-0">Verify Password</label>
                                 <div className="input-group mb-1">
                                     <input onChange={this.handlechange.bind(this)} type="verify" className="form-control" id="verify" />
                                 </div>
                             </div>) : null
                         }
-                        <button type="submit" class="btn btn-dark theme-light w-100 mx-0 my-3" onClick={this.submit.bind(this)}>{this.state.mode === 'LOG IN' ? 'Sign In' : 'Create Account'}</button>
+                        <button type="submit" className="btn btn-dark theme-light w-100 mx-0 my-3" onClick={this.submit.bind(this)}>{this.state.mode === 'LOG IN' ? 'Sign In' : 'Create Account'}</button>
                         {this.state.mode === 'LOG IN' ?
                             (<div className="card">
                                 <div className="card-body input-label p-1 d-flex justify-content-center align-items-center">

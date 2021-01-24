@@ -4,12 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-const mysql = require('mysql');
+var bodyParser = require('body-parser');
+var mysql = require('mysql');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
 var testAPIRouter = require('./routes/testAPI')
+var createUserRouter = require('./routes/createUser')
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -24,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/testAPI", testAPIRouter);
+app.use("/createUser", createUserRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -41,14 +44,15 @@ app.use(function(err, req, res, next) {
 });
 
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'yiwei0318',
-  database: 'study_with_me'
+    host: 'localhost',
+    user: 'root',
+    password: 'yiwei0318',
+    database: 'study_with_me'
 });
-connection.connect((err) => {
-  if (err) throw err;
-  console.log('Connected!');
-});
+
+// connection.connect((err) => {
+//   if (err) throw err;
+//   console.log('Connected!');
+// });
 
 module.exports = app;

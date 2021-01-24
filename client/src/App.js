@@ -5,11 +5,6 @@ import IntroBox from './IntroBox.js'
 
 function App() {
   const size = useWindowSize()
-  // function temp() {
-  //   fetch("http://localhost:9000/testAPI")
-  //     .then(res => res.text())
-  //     .then(res => setMain(<div>{res}</div>))
-  // }
   
   return (
     <div className="App">
@@ -40,8 +35,6 @@ function App() {
     </div>
   );
 }
-
-
 
 function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
