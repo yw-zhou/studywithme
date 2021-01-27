@@ -2,16 +2,16 @@
 
 var User = require('../model/userModel.js');
 
-exports.list_all_tasks = function(req, res) {
-  User.getAllTask(function(err, user) {
+// exports.list_all_tasks = function(req, res) {
+//   User.getAllTask(function(err, user) {
 
-    console.log('controller')
-    if (err)
-      res.send(err);
-      console.log('res', user);
-    res.send(user);
-  });
-};
+//     console.log('controller')
+//     if (err)
+//       res.send(err);
+//       console.log('res', user);
+//     res.send(user);
+//   });
+// };
 
 exports.create_a_user = function (req, res) {
   var new_user = new User(req.body.user);
@@ -24,4 +24,12 @@ exports.create_a_user = function (req, res) {
     res.json(user);
   });
   
+};
+
+exports.get_user = function (req, res) {
+  console.log("email", req.query.email);
+  User.getUser(req.query.email, function (err, user) { 
+    if (err) return res.status(400).send({ error:true, message: err });  
+    res.json(user);
+  });
 };

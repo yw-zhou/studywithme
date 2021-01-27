@@ -19,4 +19,10 @@ User.createUser = function (newUser, result) {
         }
     })   
 };
+User.getUser = function (email, result) {
+    sql.query("SELECT * FROM users WHERE email='"+email+"';", function (err, res) { 
+        if(err) result(err, null)
+        result(null, res);
+    })
+}
 module.exports=User;

@@ -3,7 +3,7 @@ var router = express.Router();
 var userController = require('../controllers/userController');
 
 router
-    .get("/", function (req, res, next) {res.send("API is working")})
+    .get("/", userController.get_user)
     .post("/", userController.create_a_user)
     // .post("/", function (req, res, next) { res.send(req.body) })
 

@@ -33,9 +33,13 @@ function App() {
               }
           },
       }} />
-      <IntroBox/>
+      <IntroBox alert={sendAlert} />
     </div>
   );
+}
+
+function sendAlert(alert) {
+  
 }
 
 function useWindowSize() {

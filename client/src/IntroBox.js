@@ -11,9 +11,14 @@ class IntroBox extends Component {
                 return
             }
             const user = { email: this.state.email, password: this.state.password }
-            console.log(user)
             axios.post("http://localhost:9000/createUser", {user}).then(res => console.log(res))
             // axios.get("http://localhost:9000/testAPI").then(res => console.log(res))
+        } else if (this.state.mode === 'Log In') {
+            axios.get("http://localhost:9000/createUser?email=" + this.state.email).then(res => {
+                if (!res.data.length || res.data[0].password !== this.state.password) {
+                    this.props.alert('incorrectLogin')
+                }
+            })
         }
         
     }
