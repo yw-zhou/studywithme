@@ -21,9 +21,10 @@
   }
 }
 
-#tsparticles {
-  height: 100vh;
-}
+/* #tsparticles {
+  height: 10000px;
+  width: 3000px;
+} */
 
 .theme-light {
   background-color: #5d6779;

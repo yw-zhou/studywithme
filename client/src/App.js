@@ -9,6 +9,8 @@ function App() {
   return (
     <div className="App">
       <Particles
+        width='100%'
+        height='100%'
         params={{
           "particles": {
               "number": {
