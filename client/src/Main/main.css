@@ -2,10 +2,21 @@
   width: 30%;
   height: 100%;
   z-index: 10;
+  max-width: 300px;
+  min-width: 200px;
   background-color: #12173a;
   position: relative;
 }
 
 #profilePic {
   border-radius: 50%;
+}
+
+.userinfo {
+  word-wrap: break-word;
+  margin: auto;
+}
+
+.light-purple {
+  color: #7368ef;
 }

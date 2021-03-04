@@ -7,16 +7,16 @@ import "./main.css"
 class Main extends Component {
   state = {
     //mock info for now
-    username: 'yiweizhou123.com'
+    username: 'yiweizhou123@gmail.com'
   }
 
   componentDidMount() {
-
+    // console.log(this.props.user)
   }
   render() {
-    return (<div className="vh-100">
+    return (<div className="vh-100 w-100">
       <div className="side-info">
-        <UserInfo/>
+        <UserInfo email={this.state.username}/>
       </div>
     </div>);
   }

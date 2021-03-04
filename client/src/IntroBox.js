@@ -15,12 +15,7 @@ class IntroBox extends Component {
             // axios.get("http://localhost:9000/testAPI").then(res => console.log(res))
         } else if (this.state.mode === 'Log In') {
             axios.get("http://localhost:9000/createUser?email=" + this.state.email).then(res => {
-                if (!res.data.length || res.data[0].password !== this.state.password) {
-                    this.props.alert('incorrectLogin')
-                    return
-                }
-                // Think about how to pass user credentials securely to main
-                window.location.href = "/"
+                this.props.submit(res.data, this.state.password)
             })
         }
         

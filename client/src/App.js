@@ -2,12 +2,25 @@ import Particles from 'react-particles-js';
 import { useState, useEffect } from 'react';
 import './App.css';
 import IntroBox from './IntroBox.js'
-import { Route, BrowserRouter } from "react-router-dom";
+import { Route, BrowserRouter, Switch } from "react-router-dom";
 import Main from './Main/Main'
 // import LogIn from './LogIn'
 
 function App() {
   const size = useWindowSize()
+  // let userInfo = null
+
+  // const [userInfo, setUserInfo] = useState(null);
+
+  
+  function handleSubmit(data, passwordInput) {
+    if (!data.length || data[0].password !== passwordInput) {
+        console.log("allerrertt")
+        return
+    }
+    // setUserInfo(data[0])
+    window.location.href = "/"
+  }
   
   return (
     <BrowserRouter>
@@ -38,16 +51,17 @@ function App() {
                 }
             },
           }} />
-        <Route path='/loggin' render={(props) => (<IntroBox alert={sendAlert} />)} />
-        <Route path='/' component={Main} />
+        {/* <div class="alert alert-danger" role="alert">
+          Username or Password Incorrect
+        </div> */}
+        <Switch>
+          <Route path='/loggin' render={(props) => (<IntroBox submit={handleSubmit} />)} />
+          <Route exact path='/' component={Main} />
+        </Switch>
       </div>
     </BrowserRouter>
   );
   
-}
-
-function sendAlert(alert) {
-  console.log("ALEERTT")
 }
 
 function useWindowSize() {

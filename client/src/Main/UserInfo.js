@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ProfilePic from "./MockPic.jpg"
+import axios from 'axios'
 
 //Todos:
 // Hashing for security for users to contact db
@@ -8,14 +9,30 @@ import ProfilePic from "./MockPic.jpg"
 // think about how users can upload photos to db
 
 class UserInfo extends Component {
+  state = {}
 
   componentDidMount() {
-    
+    axios.get("http://localhost:9000/createUser?email=" + this.props.email).then(res => {
+      console.log(res)
+      // if (!res.data.length) {
+      //   //maybe return something telling them they did not log in? or something went wrong...
+      //   window.location.href = "/loggin"
+      // }
+      this.setState({userData:res.data[0]})
+    })
   }
 
   render() {
+    if (!this.state.userData) return null
     return (<div>
-      <img className="w-50 m-5" id="profilePic" src={ProfilePic} alt="profile pic" />
+      <img className="w-50 mx-5 mt-5 mb-4" id="profilePic" src={ProfilePic} alt="profile pic" />
+      <div className="mx-2 userinfo">
+        <h5>{this.state.userData.name}</h5>
+        <p>{this.state.userData.intro}</p>
+      </div>
+      <div>
+        <h3 className="light-purple">Groups</h3>
+      </div>
       
     </div>);
   }
