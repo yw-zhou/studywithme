@@ -1,6 +1,7 @@
 .App {
   text-align: center;
-  background-color: #282c34;
+  /* background-color: #282c34; */
+  background-color: #262c4a;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -21,13 +22,15 @@
   }
 }
 
-/* #tsparticles {
-  height: 10000px;
-  width: 3000px;
-} */
+#tsparticles {
+  /* height: 10000px;
+  width: 3000px; */
+  z-index: 0;
+}
 
 .theme-light {
-  background-color: #5d6779;
+  /* background-color: #5d6779; */
+  background-color: #262c4a;
 }
 
 .title-page-centre {

@@ -17,10 +17,10 @@ class IntroBox extends Component {
             axios.get("http://localhost:9000/createUser?email=" + this.state.email).then(res => {
                 if (!res.data.length || res.data[0].password !== this.state.password) {
                     this.props.alert('incorrectLogin')
-                    console.log("incorrect")
                     return
                 }
-                console.log('logged in!')
+                // Think about how to pass user credentials securely to main
+                window.location.href = "/"
             })
         }
         
