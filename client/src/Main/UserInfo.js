@@ -23,12 +23,23 @@ class UserInfo extends Component {
       this.setState({userData:res.data[0]})
     })
     axios.get("http://localhost:9000/group/getGroups?user=" + this.props.email).then(res => {
-      this.setState({groups:res.data})
+      // this.setState({groups:res.data})
     })
   }
 
   render() {
     if (!this.state.userData) return null
+
+    let searchBar = null
+    if (this.state.showSearch || !this.state.groups.length) {
+      searchBar = (
+        <div class="input-group mb-3">
+          <input type="text" className="form-control light-purple" placeholder="Group Code" aria-label="Group Code" aria-describedby="button-addon2"/>
+          <button className="btn btn-outline-secondary light-purple" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
+        </div>
+      )
+    }
+
     return (<div className='px-3'>
       <img className="w-50 mt-5 mb-4" id="profilePic" src={ProfilePic} alt="profile pic" />
       <div className="userinfo">
@@ -45,10 +56,12 @@ class UserInfo extends Component {
             <button type="button" class="btn pt-0 pb-1 px-1"><i class="bi bi-compass light-purple"></i></button>
           </span>
         </div>
+        {searchBar}
         <div className='light-purple-background rounded py-2'>
           {this.state.groups.map((group) => (
             <button type="button" class="btn"><li>{group.groupName}</li></button>
           ))}
+          <p className="m-3">{(this.state.groups.length? "": 'No Groups at the moment, Join above!')}</p>
         </div>
       </div>
       
