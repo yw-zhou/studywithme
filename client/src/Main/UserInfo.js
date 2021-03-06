@@ -34,8 +34,8 @@ class UserInfo extends Component {
     if (this.state.showSearch || !this.state.groups.length) {
       searchBar = (
         <div class="input-group mb-3">
-          <input type="text" className="form-control light-purple" placeholder="Group Code" aria-label="Group Code" aria-describedby="button-addon2"/>
-          <button className="btn btn-outline-secondary light-purple" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
+          <input type="text" className="form-control border-secondary text-info bg-light" placeholder="Group Code" aria-label="Group Code" aria-describedby="button-addon2"/>
+          <button className="btn btn-outline-secondary" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
         </div>
       )
     }
@@ -48,20 +48,20 @@ class UserInfo extends Component {
       </div>
       <div className='groups'>
         <div className="d-flex align-items-center">
-          <h3 className="light-purple">Groups</h3>
+          <h3 className="text-secondary">Groups</h3>
           <span className="d-inline-block ms-auto" tabindex="0" data-bs-toggle="tooltip" title="Add Group" data-bs-animation='true'>
-            <button type="button" class="btn pt-0 pb-1 px-1"><i className="bi bi-plus-circle light-purple"></i></button>
+            <button type="button" class="btn pt-0 pb-1 px-1"><i className="bi bi-plus-circle text-secondary"></i></button>
           </span>
           <span className="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="Explore Public Groups" data-bs-animation='true'>
-            <button type="button" class="btn pt-0 pb-1 px-1"><i class="bi bi-compass light-purple"></i></button>
+            <button type="button" class="btn pt-0 pb-1 px-1"><i class="bi bi-compass text-secondary"></i></button>
           </span>
         </div>
         {searchBar}
-        <div className='light-purple-background rounded py-2'>
+        <div className='bg-secondary rounded py-2'>
           {this.state.groups.map((group) => (
-            <button type="button" class="btn"><li>{group.groupName}</li></button>
+            <button type="button" className="btn text-info"><li>{group.groupName}</li></button>
           ))}
-          <p className="m-3">{(this.state.groups.length? "": 'No Groups at the moment, Join above!')}</p>
+         {this.state.groups.length? null: ( <p className="m-3">'No Groups at the moment, Join above!'</p>)}
         </div>
       </div>
       

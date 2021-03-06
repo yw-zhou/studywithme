@@ -1,7 +1,13 @@
 $secondary: #7368ef;
+$light: #262c4a;
+$dark: #12173a;
+$info: white;
 
 $theme-colors: (
   "secondary": $secondary,
+  "light": $light,
+  "dark": $dark,
+  "info": $info,
 );
 
 @import "~bootstrap/scss/bootstrap";

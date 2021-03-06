@@ -1,14 +1,13 @@
 .App {
   text-align: center;
-  /* background-color: #282c34; */
-  background-color: #262c4a;
+  background-color: var(--light);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: var(--info);
 }
 
 .App-logo {
@@ -28,11 +27,6 @@
   z-index: 0;
 }
 
-.theme-light {
-  /* background-color: #5d6779; */
-  background-color: #262c4a;
-}
-
 .title-page-centre {
   position: absolute;
   width: 65%;
@@ -44,7 +38,7 @@
 }
 
 .input-label {
-  color: #5d6779;
+  color: var(--light);
   font-size: 16px;
   font-weight: 700;
   float: left;

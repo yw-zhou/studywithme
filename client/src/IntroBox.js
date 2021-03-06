@@ -38,8 +38,8 @@ class IntroBox extends Component {
                 <h1 id="main-title">Let's Study Together!</h1>
                 <p>During Covid blah blah blah (some explanation of helping each other)</p>
                 <div>
-                    <button type="button" className="btn btn-dark theme-light mx-2" onClick={() => this.setState({ mode: 'Sign Up' })} >Sign Up</button>
-                    <button type="button" className="btn btn-light mx-2" onClick={() => this.setState({ mode: 'Log In' })}>Log In</button>
+                    <button type="button" className="btn btn-info text-dark mx-2" onClick={() => this.setState({ mode: 'Sign Up' })} >Sign Up</button>
+                    <button type="button" className="btn btn-secondary text-info mx-2" onClick={() => this.setState({ mode: 'Log In' })}>Log In</button>
                 </div>
             </div>
         )
@@ -47,7 +47,7 @@ class IntroBox extends Component {
             main = (
                 <div className="card">
                     <div className="card-body">
-                        <h5 className="card-title mb-2 text-muted">{this.state.mode}</h5>
+                        <h5 className="card-title mb-2 text-light">{this.state.mode}</h5>
                         <label className="input-label">Email</label>
                         <div className="input-group mb-1">
                             <input onChange={this.handlechange.bind(this)} type="text" className="form-control" id="email" aria-label="Email" aria-describedby="basic-addon2" />
@@ -72,13 +72,13 @@ class IntroBox extends Component {
                                 </div>
                             </div>) : null
                         }
-                        <button type="submit" className="btn btn-dark theme-light w-100 mx-0 my-3" onClick={this.submit.bind(this)}>{this.submit_messages[this.state.mode]}</button>
+                        <button type="submit" className="btn btn-light w-100 mx-0 my-3" onClick={this.submit.bind(this)}>{this.submit_messages[this.state.mode]}</button>
                         
                         {this.state.mode !== 'Password Reset' ?
                             (<div className="card">
                                 <div className="card-body input-label p-1 d-flex justify-content-center align-items-center">
                                     <p className="m-0">{this.state.mode === 'Log In' ? 'New to Study With Me?' : 'Already have an account?'}</p>
-                                    <button type="button" className="btn btn-link" onClick={this.toggle.bind(this)}>{this.state.mode === 'Log In' ? 'Create an Account' : 'Log in Here'}</button>
+                                    <button type="button" className="btn btn-link text-secondary" onClick={this.toggle.bind(this)}>{this.state.mode === 'Log In' ? 'Create an Account' : 'Log in Here'}</button>
                                 </div>
                             </div>) : null
                         }

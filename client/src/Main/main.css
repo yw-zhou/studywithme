@@ -4,7 +4,6 @@
   z-index: 10;
   max-width: 300px;
   min-width: 200px;
-  background-color: #12173a;
   position: relative;
 }
 
@@ -17,22 +16,10 @@
   margin: auto;
 }
 
-.light-purple {
-  color: #7368ef;
-}
-
-.light-purple-background {
-  background-color: #7368ef;
-}
-
 .groups {
   list-style-type: circle;
   font-size: 18px;
   text-align: start;
-}
-
-.groups button {
-  color: white !important;
 }
 
 .ms-auto {

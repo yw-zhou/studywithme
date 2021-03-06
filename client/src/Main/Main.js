@@ -15,7 +15,7 @@ class Main extends Component {
   }
   render() {
     return (<div className="vh-100 w-100">
-      <div className="side-info">
+      <div className="side-info bg-dark">
         <UserInfo email={this.state.username}/>
       </div>
     </div>);
