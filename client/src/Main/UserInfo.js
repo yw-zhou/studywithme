@@ -36,7 +36,15 @@ class UserInfo extends Component {
         <p>{this.state.userData.intro}</p>
       </div>
       <div className='groups'>
-        <h3 className="light-purple">Groups</h3>
+        <div className="d-flex align-items-center">
+          <h3 className="light-purple">Groups</h3>
+          <span className="d-inline-block ms-auto" tabindex="0" data-bs-toggle="tooltip" title="Add Group" data-bs-animation='true'>
+            <button type="button" class="btn pt-0 pb-1 px-1"><i className="bi bi-plus-circle light-purple"></i></button>
+          </span>
+          <span className="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="Explore Public Groups" data-bs-animation='true'>
+            <button type="button" class="btn pt-0 pb-1 px-1"><i class="bi bi-compass light-purple"></i></button>
+          </span>
+        </div>
         <div className='light-purple-background rounded py-2'>
           {this.state.groups.map((group) => (
             <button type="button" class="btn"><li>{group.groupName}</li></button>

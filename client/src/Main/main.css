@@ -34,3 +34,7 @@
 .groups button {
   color: white !important;
 }
+
+.ms-auto {
+  margin-left: auto;
+}
