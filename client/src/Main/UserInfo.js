@@ -9,7 +9,9 @@ import axios from 'axios'
 // think about how users can upload photos to db
 
 class UserInfo extends Component {
-  state = {}
+  state = {
+    groups:[]
+  }
 
   componentDidMount() {
     axios.get("http://localhost:9000/createUser?email=" + this.props.email).then(res => {
@@ -19,6 +21,9 @@ class UserInfo extends Component {
       //   window.location.href = "/loggin"
       // }
       this.setState({userData:res.data[0]})
+    })
+    axios.get("http://localhost:9000/group/getGroups?user=" + this.props.email).then(res => {
+      this.setState({groups:res.data})
     })
   }
 
@@ -32,6 +37,11 @@ class UserInfo extends Component {
       </div>
       <div>
         <h3 className="light-purple">Groups</h3>
+        <div className='light-purple-background rounded mx-3'>
+          {this.state.groups.map((group) => (
+            <li>{group.groupName}</li>
+          ))}
+        </div>
       </div>
       
     </div>);
