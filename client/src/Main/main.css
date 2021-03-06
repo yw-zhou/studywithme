@@ -24,3 +24,13 @@
 .light-purple-background {
   background-color: #7368ef;
 }
+
+.groups {
+  list-style-type: circle;
+  font-size: 18px;
+  text-align: start;
+}
+
+.groups button {
+  color: white !important;
+}

@@ -29,17 +29,17 @@ class UserInfo extends Component {
 
   render() {
     if (!this.state.userData) return null
-    return (<div>
-      <img className="w-50 mx-5 mt-5 mb-4" id="profilePic" src={ProfilePic} alt="profile pic" />
-      <div className="mx-2 userinfo">
+    return (<div className='px-3'>
+      <img className="w-50 mt-5 mb-4" id="profilePic" src={ProfilePic} alt="profile pic" />
+      <div className="userinfo">
         <h5>{this.state.userData.name}</h5>
         <p>{this.state.userData.intro}</p>
       </div>
-      <div>
+      <div className='groups'>
         <h3 className="light-purple">Groups</h3>
-        <div className='light-purple-background rounded mx-3'>
+        <div className='light-purple-background rounded py-2'>
           {this.state.groups.map((group) => (
-            <li>{group.groupName}</li>
+            <button type="button" class="btn"><li>{group.groupName}</li></button>
           ))}
         </div>
       </div>
