@@ -62,7 +62,7 @@ class IntroBox extends Component {
                                     <input onChange={this.handlechange.bind(this)} type="password" className="form-control" id="password" />
                                 </div>
                             </div>) :
-                            (<p class="font-weight-light text-left text-muted" style={{fontSize:14}}>You will receive an email with a password reset link.</p>)
+                            (<p className="font-weight-light text-left text-muted" style={{fontSize:14}}>You will receive an email with a password reset link.</p>)
                         }
                         {this.state.mode === 'Sign Up' ?
                             (<div>

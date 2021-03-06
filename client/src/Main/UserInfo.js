@@ -33,9 +33,9 @@ class UserInfo extends Component {
     let searchBar = null
     if (this.state.showSearch || !this.state.groups.length) {
       searchBar = (
-        <div class="input-group mb-3">
+        <div className="input-group mb-3">
           <input type="text" className="form-control border-secondary text-info bg-light" placeholder="Group Code" aria-label="Group Code" aria-describedby="button-addon2"/>
-          <button className="btn btn-outline-secondary" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
+          <button className="btn btn-outline-secondary" type="button" id="button-addon2"><i className="bi bi-search"></i></button>
         </div>
       )
     }
@@ -49,11 +49,11 @@ class UserInfo extends Component {
       <div className='groups'>
         <div className="d-flex align-items-center">
           <h3 className="text-secondary">Groups</h3>
-          <span className="d-inline-block ms-auto" tabindex="0" data-bs-toggle="tooltip" title="Add Group" data-bs-animation='true'>
-            <button type="button" class="btn pt-0 pb-1 px-1"><i className="bi bi-plus-circle text-secondary"></i></button>
+          <span className="d-inline-block ms-auto" data-bs-toggle="tooltip" title="Add Group" data-bs-animation='true'>
+            <button type="button" className="btn pt-0 pb-1 px-1" onClick={this.props.createNewGroup}><i className="bi bi-plus-circle text-secondary"></i></button>
           </span>
-          <span className="d-inline-block" tabindex="0" data-bs-toggle="tooltip" title="Explore Public Groups" data-bs-animation='true'>
-            <button type="button" class="btn pt-0 pb-1 px-1"><i class="bi bi-compass text-secondary"></i></button>
+          <span className="d-inline-block" data-bs-toggle="tooltip" title="Explore Public Groups" data-bs-animation='true'>
+            <button type="button" className="btn pt-0 pb-1 px-1"><i className="bi bi-compass text-secondary"></i></button>
           </span>
         </div>
         {searchBar}

@@ -1,10 +1,8 @@
 .side-info {
   width: 30%;
   height: 100%;
-  z-index: 10;
   max-width: 300px;
   min-width: 200px;
-  position: relative;
 }
 
 #profilePic {
@@ -24,4 +22,29 @@
 
 .ms-auto {
   margin-left: auto;
+}
+
+.side-info,
+.create-group-form {
+  z-index: 10;
+  position: relative;
+}
+
+.create-group-form {
+  max-width: 600px;
+}
+
+.small-size-label {
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: #fff;
+  border-color: var(--secondary);
+  background-color: var(--secondary);
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: 0 0 0 0.2rem rgb(114 103 239 / 25%);
 }
