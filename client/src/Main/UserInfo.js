@@ -43,14 +43,6 @@ class UserInfo extends Component {
     this.setState({ searchCode: e.target.value });
   }
 
-  handleSearchCode() {
-    axios
-      .get(
-        `http://localhost:9000/group/getGroupInfo?groupId=${this.state.searchCode}`
-      )
-      .then((res) => console.log(res));
-  }
-
   render() {
     if (!this.state.userData) return null;
     // console.log(this.state.selectedGroup);
@@ -108,7 +100,7 @@ class UserInfo extends Component {
               className="btn btn-outline-secondary"
               type="button"
               id="button-addon2"
-              onClick={this.handleSearchCode.bind(this)}
+              onClick={() => this.props.handleSearchCode(this.state.searchCode)}
             >
               <i className="bi bi-search"></i>
             </button>

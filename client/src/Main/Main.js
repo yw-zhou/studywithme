@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import UserInfo from "./UserInfo";
 import "./main.css";
-import CreateGroup from "./CreateGroup";
+import CreateGroupModal from "./CreateGroupModal";
+import GroupInfoModal from "./ViewGroupInfo";
+import axios from "axios";
 
 // Think about how to pass user credentials securely to this site
 
@@ -14,8 +16,33 @@ class Main extends Component {
   componentDidMount() {
     // console.log(this.props.user)
   }
-  toggleRenderGroup() {
-    this.setState({ renderGroup: !this.state.renderGroup });
+  toggleRenderCreateGroupModal() {
+    this.setState({
+      renderGroupModal: !this.state.renderGroupModal,
+      groupSettingsData: null,
+    });
+  }
+  handleSearchCode(searchCode) {
+    axios
+      .get(`http://localhost:9000/group/getGroupInfo?groupId=${searchCode}`)
+      .then((res) =>
+        this.setState({
+          groupSettingsData: res.data[0],
+          renderGroupModal: false,
+        })
+      );
+  }
+  addAssignment() {
+    var assignment = {
+      user: this.state.username,
+      ...this.state.groupSettingsData,
+    };
+    axios
+      .post("http://localhost:9000/group/createAssignment", { assignment })
+      .then((res) => {
+        console.log("assignment results", res);
+        // this.props.toggleRender();
+      });
   }
   render() {
     return (
@@ -23,16 +50,25 @@ class Main extends Component {
         <div className="side-info bg-dark">
           <UserInfo
             email={this.state.username}
-            createNewGroup={this.toggleRenderGroup.bind(this)}
+            createNewGroup={this.toggleRenderCreateGroupModal.bind(this)}
+            handleSearchCode={this.handleSearchCode.bind(this)}
           />
         </div>
         <div className="w-100">
-          {this.state.renderGroup ? (
-            <CreateGroup
-              user={this.state.username}
-              toggleRender={this.toggleRenderGroup.bind(this)}
-            />
-          ) : null}
+          <div className="mx-auto bg-dark create-group-form card border-0">
+            {this.state.renderGroupModal && (
+              <CreateGroupModal
+                user={this.state.username}
+                toggleRender={this.toggleRenderCreateGroupModal.bind(this)}
+              />
+            )}
+            {this.state.groupSettingsData && (
+              <GroupInfoModal
+                data={this.state.groupSettingsData}
+                addAssignment={this.addAssignment.bind(this)}
+              />
+            )}
+          </div>
         </div>
       </div>
     );
