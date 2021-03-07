@@ -25,7 +25,7 @@ class UserInfo extends Component {
         this.setState({ userData: res.data[0] });
       });
     axios
-      .get("http://localhost:9000/group/getGroups?user=" + this.props.email)
+      .get(`http://localhost:9000/group/getGroups?user=${this.props.email}`)
       .then((res) => {
         this.setState({
           groups: res.data,
@@ -36,8 +36,19 @@ class UserInfo extends Component {
   }
 
   handleGroupSelect(e) {
-    // console.log(e.parentNode);
     this.setState({ selectedGroup: e.target.id });
+  }
+
+  handleChange(e) {
+    this.setState({ searchCode: e.target.value });
+  }
+
+  handleSearchCode() {
+    axios
+      .get(
+        `http://localhost:9000/group/getGroupInfo?groupId=${this.state.searchCode}`
+      )
+      .then((res) => console.log(res));
   }
 
   render() {
@@ -91,11 +102,13 @@ class UserInfo extends Component {
               placeholder="Group Code"
               aria-label="Group Code"
               aria-describedby="button-addon2"
+              onChange={this.handleChange.bind(this)}
             />
             <button
               className="btn btn-outline-secondary"
               type="button"
               id="button-addon2"
+              onClick={this.handleSearchCode.bind(this)}
             >
               <i className="bi bi-search"></i>
             </button>

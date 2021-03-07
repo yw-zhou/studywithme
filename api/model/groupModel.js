@@ -20,6 +20,16 @@ Group.getGroups = function (user, result) {
   );
 };
 
+Group.getGroupInfo = function (groupId, result) {
+  sql.query(
+    "SELECT * FROM groupSettings WHERE groupId='" + groupId + "';",
+    function (err, res) {
+      if (err) result(err, null);
+      result(null, res);
+    }
+  );
+};
+
 Group.createGroup = function (new_group, result) {
   sql.query("INSERT INTO groupSettings SET ?", new_group, function (err, res) {
     if (err) result(err, null);
