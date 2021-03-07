@@ -48,3 +48,11 @@
 .custom-control-input:focus ~ .custom-control-label::before {
   box-shadow: 0 0 0 0.2rem rgb(114 103 239 / 25%);
 }
+
+li {
+  text-align: start;
+}
+
+.noFocus:focus {
+  box-shadow: none !important;
+}

@@ -32,7 +32,10 @@ class CreateGroup extends Component {
     };
     axios
       .post("http://localhost:9000/group/createGroup", { group })
-      .then((res) => console.log("create results", res));
+      .then((res) => {
+        console.log("create results", res);
+        this.props.toggleRender();
+      });
   }
   render() {
     return (
@@ -99,7 +102,12 @@ class CreateGroup extends Component {
               </label>
             </div>
           )}
-          <button className="btn btn-light w-25 mx-2">Cancel</button>
+          <button
+            className="btn btn-light w-25 mx-2"
+            onClick={this.props.toggleRender}
+          >
+            Cancel
+          </button>
           <button
             onClick={this.handleSubmit.bind(this)}
             type="submit"

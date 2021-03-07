@@ -14,8 +14,8 @@ class Main extends Component {
   componentDidMount() {
     // console.log(this.props.user)
   }
-  createNewGroup() {
-    this.setState({ renderGroup: true });
+  toggleRenderGroup() {
+    this.setState({ renderGroup: !this.state.renderGroup });
   }
   render() {
     return (
@@ -23,12 +23,15 @@ class Main extends Component {
         <div className="side-info bg-dark">
           <UserInfo
             email={this.state.username}
-            createNewGroup={this.createNewGroup.bind(this)}
+            createNewGroup={this.toggleRenderGroup.bind(this)}
           />
         </div>
         <div className="w-100">
           {this.state.renderGroup ? (
-            <CreateGroup user={this.state.username} />
+            <CreateGroup
+              user={this.state.username}
+              toggleRender={this.toggleRenderGroup.bind(this)}
+            />
           ) : null}
         </div>
       </div>
