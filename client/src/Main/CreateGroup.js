@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./main.css";
+import axios from "axios";
 const cryptoRandomString = require("crypto-random-string");
 
 // Think about how to pass user credentials securely to this site
@@ -29,9 +30,9 @@ class CreateGroup extends Component {
       isPublic: this.state.isPublic,
     };
     console.log(group);
-    // axios
-    //   .post("http://localhost:9000/createUser", { user })
-    //   .then((res) => console.log(res));
+    axios
+      .post("http://localhost:9000/group/createGroup", { group })
+      .then((res) => console.log(res));
   }
   render() {
     return (
