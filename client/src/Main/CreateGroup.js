@@ -28,11 +28,11 @@ class CreateGroup extends Component {
       password: this.state.password || "",
       description: this.state.description,
       isPublic: this.state.isPublic,
+      user: this.props.user,
     };
-    console.log(group);
     axios
       .post("http://localhost:9000/group/createGroup", { group })
-      .then((res) => console.log(res));
+      .then((res) => console.log("create results", res));
   }
   render() {
     return (

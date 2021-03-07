@@ -20,11 +20,29 @@ Group.getGroups = function (user, result) {
   );
 };
 
-Group.createUser = function (new_group, result) {
+Group.createGroup = function (new_group, result) {
   sql.query("INSERT INTO groupSettings SET ?", new_group, function (err, res) {
     if (err) result(err, null);
     result(null, res);
   });
 };
 
-module.exports = Group;
+var Assignment = function (assignment) {
+  this.groupId = assignment.groupCode;
+  this.groupName = assignment.groupName;
+  this.user = assignment.user;
+};
+
+Assignment.createAssignment = function (new_assignment, result) {
+  sql.query(
+    "INSERT INTO groupMembers SET ?",
+    new_assignment,
+    function (err, res) {
+      if (err) result(err, null);
+      result(null, res);
+    }
+  );
+};
+
+exports.Group = Group;
+exports.Assignment = Assignment;
