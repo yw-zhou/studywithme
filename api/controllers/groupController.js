@@ -16,6 +16,15 @@ exports.get_group_info = function (req, res) {
   });
 };
 
+exports.get_schedules = function (req, res) {
+  console.log(req.query.groupId);
+  Group.getSchedules(req.query.groupId, function (err, groups) {
+    console.log(err);
+    if (err) return res.status(400).send({ error: true, message: err });
+    res.json(groups);
+  });
+};
+
 exports.create_group = function (req, res) {
   var new_group = new Group(req.body.group);
   console.log(new_group);

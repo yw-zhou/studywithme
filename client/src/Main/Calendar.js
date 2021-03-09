@@ -8,11 +8,15 @@ class Calendar extends Component {
   state = {};
 
   componentDidMount() {
-    // console.log(this.props.user)
+    axios
+      .get(
+        `http://localhost:9000/group/getSchedules?groupId=${this.props.groupId}`
+      )
+      .then((res) => console.log(res));
   }
 
   render() {
-    return <div></div>;
+    return <div>Calendar</div>;
   }
 }
 

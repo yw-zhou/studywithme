@@ -1,5 +1,6 @@
 "user strict";
 var sql = require("./db.js");
+var moment = require("moment");
 
 //Task object constructor
 var Group = function (group) {
@@ -23,6 +24,19 @@ Group.getGroups = function (user, result) {
 Group.getGroupInfo = function (groupId, result) {
   sql.query(
     "SELECT * FROM groupSettings WHERE groupId='" + groupId + "';",
+    function (err, res) {
+      if (err) result(err, null);
+      result(null, res);
+    }
+  );
+};
+
+Group.getSchedules = function (groupId, result) {
+  const start_day = moment().startOf("week").format("YYYY-MM-DD HH:mm:ss");
+  const end_day = moment().endOf("week").format("YYYY-MM-DD HH:mm:ss");
+  console.log(start_day, end_day);
+  sql.query(
+    `SELECT user, datetime FROM schedule WHERE groupId='${groupId}' AND datetime >= '${start_day}' AND datetime <= '${end_day}';`,
     function (err, res) {
       if (err) result(err, null);
       result(null, res);

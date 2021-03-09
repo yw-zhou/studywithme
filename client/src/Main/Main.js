@@ -46,6 +46,7 @@ class Main extends Component {
       });
   }
   loadCalendar(groupId) {
+    // console.log(groupId);
     this.setState({ selectedGroupId: groupId, renderCalendar: true });
   }
   render() {
@@ -76,7 +77,10 @@ class Main extends Component {
           </div>
           {this.state.renderCalendar && (
             <div>
-              <Calendar />
+              <Calendar
+                groupId={this.state.selectedGroupId}
+                key={this.state.selectedGroupId}
+              />
             </div>
           )}
         </div>
