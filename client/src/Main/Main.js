@@ -3,6 +3,7 @@ import UserInfo from "./UserInfo";
 import "./main.css";
 import CreateGroupModal from "./CreateGroupModal";
 import GroupInfoModal from "./ViewGroupInfo";
+import Calendar from "./Calendar";
 import axios from "axios";
 
 // Think about how to pass user credentials securely to this site
@@ -44,6 +45,9 @@ class Main extends Component {
         // this.props.toggleRender();
       });
   }
+  loadCalendar(groupId) {
+    this.setState({ selectedGroupId: groupId, renderCalendar: true });
+  }
   render() {
     return (
       <div className="vh-100 w-100 d-flex align-items-center">
@@ -52,6 +56,7 @@ class Main extends Component {
             email={this.state.username}
             createNewGroup={this.toggleRenderCreateGroupModal.bind(this)}
             handleSearchCode={this.handleSearchCode.bind(this)}
+            selectGroup={this.loadCalendar.bind(this)}
           />
         </div>
         <div className="w-100">
@@ -69,6 +74,11 @@ class Main extends Component {
               />
             )}
           </div>
+          {this.state.renderCalendar && (
+            <div>
+              <Calendar />
+            </div>
+          )}
         </div>
       </div>
     );

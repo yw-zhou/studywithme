@@ -31,12 +31,14 @@ class UserInfo extends Component {
           groups: res.data,
           selectedGroup: res.data[0].groupId,
         });
+        this.props.selectGroup(res.data[0].groupId);
         console.log("groups!", res.data);
       });
   }
 
   handleGroupSelect(e) {
     this.setState({ selectedGroup: e.target.id });
+    this.props.selectGroup(e.target.id);
   }
 
   handleChange(e) {
