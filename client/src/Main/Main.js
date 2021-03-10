@@ -60,8 +60,12 @@ class Main extends Component {
             selectGroup={this.loadCalendar.bind(this)}
           />
         </div>
-        <div className="w-100">
-          <div className="mx-auto bg-dark create-group-form card border-0">
+        <div className="w-100 h-100">
+          <div
+            className={`m-auto bg-dark card border-0 ${
+              this.state.renderCalendar ? "calendar-modal" : "create-group-form"
+            }`}
+          >
             {this.state.renderGroupModal && (
               <CreateGroupModal
                 user={this.state.username}
@@ -74,15 +78,13 @@ class Main extends Component {
                 addAssignment={this.addAssignment.bind(this)}
               />
             )}
-          </div>
-          {this.state.renderCalendar && (
-            <div>
+            {this.state.renderCalendar && (
               <Calendar
                 groupId={this.state.selectedGroupId}
                 key={this.state.selectedGroupId}
               />
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     );

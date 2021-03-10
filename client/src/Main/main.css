@@ -63,3 +63,11 @@ li {
   min-width: 100px;
   max-width: 300px;
 }
+
+.calendar-modal {
+  height: 80%;
+}
+
+.schedule-cell {
+  height: 60px;
+}
