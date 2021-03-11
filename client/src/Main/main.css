@@ -32,6 +32,7 @@
 
 .create-group-form {
   max-width: 600px;
+  margin: auto;
 }
 
 .small-size-label,
@@ -66,8 +67,34 @@ li {
 
 .calendar-modal {
   height: 80%;
+  margin: 0 20px;
 }
 
 .schedule-cell {
-  height: 60px;
+  height: var(--cell-height);
+}
+
+.fixed-top-date {
+  position: fixed;
+  top: 0px;
+}
+
+.table-container {
+  position: relative;
+  top: var(--cell-height);
+  height: calc(100% - var(--cell-height));
+}
+
+.m-vertical {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+:root {
+  --cell-height: 80px;
+}
+
+.time-label {
+  width: 50px;
+  font-size: 14px;
 }

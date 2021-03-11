@@ -21,6 +21,7 @@ class Main extends Component {
     this.setState({
       renderGroupModal: !this.state.renderGroupModal,
       groupSettingsData: null,
+      renderCalendar: false,
     });
   }
   handleSearchCode(searchCode) {
@@ -30,6 +31,7 @@ class Main extends Component {
         this.setState({
           groupSettingsData: res.data[0],
           renderGroupModal: false,
+          renderCalendar: false,
         })
       );
   }
@@ -47,7 +49,12 @@ class Main extends Component {
   }
   loadCalendar(groupId) {
     // console.log(groupId);
-    this.setState({ selectedGroupId: groupId, renderCalendar: true });
+    this.setState({
+      selectedGroupId: groupId,
+      renderCalendar: true,
+      renderGroupModal: false,
+      groupSettingsData: null,
+    });
   }
   render() {
     return (
@@ -62,7 +69,7 @@ class Main extends Component {
         </div>
         <div className="w-100 h-100">
           <div
-            className={`m-auto bg-dark card border-0 ${
+            className={`bg-dark card border-0 m-vertical ${
               this.state.renderCalendar ? "calendar-modal" : "create-group-form"
             }`}
           >
