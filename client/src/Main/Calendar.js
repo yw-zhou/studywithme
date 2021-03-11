@@ -26,7 +26,7 @@ class Calendar extends Component {
   createTable() {
     let week = [];
     const computed_width = this.tableContainer.current.offsetWidth / 7;
-    let currday = this.state.start_date.add(10, "hours");
+    let currday = moment(this.state.start_date).add(10, "hours");
     for (let i = 0; i < 7; i++) {
       let day = [
         <div
@@ -39,8 +39,18 @@ class Calendar extends Component {
       ];
       for (let j = 0; j < 48; j++) {
         day.push(
-          <div className="border border-secondary schedule-cell">
+          <div
+            className={`border border-secondary schedule-cell ${
+              this.state.hover_cell === String(i * 48 + j) ? "hovering" : ""
+            }`}
+            id={i * 48 + j}
+            onMouseEnter={(e) => this.setState({ hover_cell: e.target.id })}
+            onMouseLeave={() => this.setState({ hover_cell: null })}
+          >
             {i === 0 && <p className="time-label">{currday.format("HH:mm")}</p>}
+            {this.state.hover_cell === String(i * 48 + j) && (
+              <i className="bi bi-person-plus-fill"></i>
+            )}
           </div>
         );
         currday.add(30, "minutes");
