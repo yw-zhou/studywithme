@@ -19,8 +19,19 @@ class Calendar extends Component {
       )
       .then((res) => console.log(res));
     const start_date = moment().startOf("week");
-    console.log(start_date);
     this.setState({ start_date: start_date });
+  }
+
+  assignSchedule(currday) {
+    // console.log(currday.format("YYYY-MM-DD HH:mm:SS"));
+    const schedule = {
+      groupId: this.props.groupId,
+      user: this.props.userId,
+      date: currday.format("YYYY-MM-DD HH:mm:SS"),
+    };
+    axios
+      .post(`http://localhost:9000/group/createSchedule`, { schedule })
+      .then((res) => console.log(res));
   }
 
   createTable() {
@@ -30,6 +41,7 @@ class Calendar extends Component {
     for (let i = 0; i < 7; i++) {
       let day = [
         <div
+          key={`day-header-${i}`}
           className="border border-secondary schedule-cell fixed-top-date pt-3"
           style={{ width: computed_width }}
         >
@@ -44,12 +56,22 @@ class Calendar extends Component {
               this.state.hover_cell === String(i * 48 + j) ? "hovering" : ""
             }`}
             id={i * 48 + j}
+            key={`cell-${i * 48 + j}`}
             onMouseEnter={(e) => this.setState({ hover_cell: e.target.id })}
             onMouseLeave={() => this.setState({ hover_cell: null })}
           >
             {i === 0 && <p className="time-label">{currday.format("HH:mm")}</p>}
             {this.state.hover_cell === String(i * 48 + j) && (
-              <i className="bi bi-person-plus-fill"></i>
+              <div className="mt-4">
+                <i
+                  onClick={this.viewScheduleSettings}
+                  className="bi bi-gear-fill mx-1"
+                ></i>
+                <i
+                  onClick={() => this.assignSchedule(currday)}
+                  className="bi bi-person-plus-fill mx-1"
+                ></i>
+              </div>
             )}
           </div>
         );
@@ -57,7 +79,11 @@ class Calendar extends Component {
         if (currday.format("HH:mm") === "00:00") currday.subtract(1, "days");
       }
       currday.add(1, "days");
-      week.push(<div style={{ width: computed_width }}>{day}</div>);
+      week.push(
+        <div key={`day-${i}`} style={{ width: computed_width }}>
+          {day}
+        </div>
+      );
     }
     return week;
   }

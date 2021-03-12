@@ -89,6 +89,7 @@ class Main extends Component {
               <Calendar
                 groupId={this.state.selectedGroupId}
                 key={this.state.selectedGroupId}
+                userId={this.state.username}
               />
             )}
           </div>
