@@ -92,9 +92,18 @@ li {
 
 :root {
   --cell-height: 80px;
+  --member-circle-width: 30px;
+  --member-circle-height: 30px;
 }
 
 .time-label {
   width: 50px;
   font-size: 14px;
+}
+
+.member {
+  width: var(--member-circle-width);
+  height: var(--member-circle-height);
+  font-size: 15px;
+  padding: 3px;
 }

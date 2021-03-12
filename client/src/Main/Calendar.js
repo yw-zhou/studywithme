@@ -10,34 +10,46 @@ class Calendar extends Component {
     super(props);
     this.tableContainer = React.createRef();
   }
-  state = {};
+  state = {
+    //mock members
+    members: { "yiweizhou123@gmail.com": { pic: null, initial: "YZ" } },
+  };
 
   componentDidMount() {
-    axios
-      .get(
-        `http://localhost:9000/group/getSchedules?groupId=${this.props.groupId}`
-      )
-      .then((res) => console.log(res));
+    this.getSchedules();
     const start_date = moment().startOf("week");
     this.setState({ start_date: start_date });
   }
 
-  assignSchedule(currday) {
-    // console.log(currday.format("YYYY-MM-DD HH:mm:SS"));
+  getSchedules() {
+    axios
+      .get(
+        `http://localhost:9000/group/getSchedules?groupId=${this.props.groupId}`
+      )
+      .then((res) => {
+        this.setState({ schedules: res.data });
+      });
+  }
+
+  assignSchedule(e) {
     const schedule = {
       groupId: this.props.groupId,
       user: this.props.userId,
-      date: currday.format("YYYY-MM-DD HH:mm:SS"),
+      date: e.target.id,
     };
     axios
       .post(`http://localhost:9000/group/createSchedule`, { schedule })
-      .then((res) => console.log(res));
+      .then((res) => {
+        console.log("setting schedules", res);
+        this.getSchedules();
+      });
   }
 
   createTable() {
     let week = [];
     const computed_width = this.tableContainer.current.offsetWidth / 7;
     let currday = moment(this.state.start_date).add(10, "hours");
+    let scheduleIndex = 0;
     for (let i = 0; i < 7; i++) {
       let day = [
         <div
@@ -50,6 +62,29 @@ class Calendar extends Component {
         </div>,
       ];
       for (let j = 0; j < 48; j++) {
+        let participants = [];
+        if (this.state.schedules[scheduleIndex] === null)
+          console.log(this.state.schedules[0]);
+        while (
+          this.state.schedules[scheduleIndex] &&
+          currday.isSame(this.state.schedules[scheduleIndex].datetime)
+        ) {
+          participants.push(this.state.schedules[scheduleIndex].user);
+          scheduleIndex++;
+        }
+        let renderParticipants = [];
+        for (let p = 0; p < participants.length; p++) {
+          if (!this.state.members[participants[p]].pic) {
+            renderParticipants.push(
+              <div
+                className="rounded-circle member m-auto"
+                style={{ backgroundColor: "#FFA142" }}
+              >
+                {this.state.members[participants[p]].initial}
+              </div>
+            );
+          }
+        }
         day.push(
           <div
             className={`border border-secondary schedule-cell ${
@@ -68,11 +103,13 @@ class Calendar extends Component {
                   className="bi bi-gear-fill mx-1"
                 ></i>
                 <i
-                  onClick={() => this.assignSchedule(currday)}
+                  onClick={this.assignSchedule.bind(this)}
+                  id={currday.format("YYYY-MM-DD HH:mm:SS")}
                   className="bi bi-person-plus-fill mx-1"
                 ></i>
               </div>
             )}
+            {renderParticipants}
           </div>
         );
         currday.add(30, "minutes");
@@ -95,7 +132,9 @@ class Calendar extends Component {
           className="d-flex overflow-auto table-container"
           ref={this.tableContainer}
         >
-          {this.state.start_date !== undefined && this.createTable()}
+          {this.state.start_date !== undefined &&
+            this.state.schedules &&
+            this.createTable()}
         </div>
       </div>
     );
