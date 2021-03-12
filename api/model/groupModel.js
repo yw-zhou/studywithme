@@ -1,6 +1,7 @@
 "user strict";
 var sql = require("./db.js");
 var moment = require("moment");
+var uuid = require("uuid");
 
 //Task object constructor
 var Group = function (group) {
@@ -68,5 +69,21 @@ Assignment.createAssignment = function (new_assignment, result) {
   );
 };
 
+var Schedule = function (schedule) {
+  this.groupId = schedule.groupId;
+  this.user = schedule.user;
+  this.datetime = schedule.date;
+  this.scheduleId = uuid.v4();
+};
+
+Schedule.createSchedule = function (new_schedule, result) {
+  sql.query("INSERT INTO schedule SET ?", new_schedule, function (err, res) {
+    console.log(err);
+    if (err) result(err, null);
+    result(null, res);
+  });
+};
+
 exports.Group = Group;
 exports.Assignment = Assignment;
+exports.Schedule = Schedule;

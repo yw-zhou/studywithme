@@ -1,6 +1,6 @@
 "use strict";
 
-const { Group, Assignment } = require("../model/groupModel.js");
+const { Group, Assignment, Schedule } = require("../model/groupModel.js");
 
 exports.get_groups = function (req, res) {
   Group.getGroups(req.query.user, function (err, groups) {
@@ -36,6 +36,14 @@ exports.create_group = function (req, res) {
     var response = { group: group };
     console.log(response);
     assign_group(req, res, response);
+  });
+};
+
+exports.create_schedule = function (req, res) {
+  var new_schedule = new Schedule(req.body.schedule);
+  Schedule.createSchedule(new_schedule, function (err, schedule) {
+    if (err) return res.status(400).send({ error: true, message: err });
+    res.json(schedule);
   });
 };
 

@@ -7,6 +7,7 @@ router
   .get("/getGroupInfo", groupController.get_group_info)
   .get("/getSchedules", groupController.get_schedules)
   .post("/createGroup", groupController.create_group)
-  .post("/assignGroup", groupController.assign_group);
+  .post("/assignGroup", groupController.assign_group)
+  .post("/createSchedule", groupController.create_schedule);
 
 module.exports = router;
