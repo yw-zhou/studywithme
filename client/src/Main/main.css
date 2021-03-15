@@ -72,6 +72,7 @@ li {
 
 .schedule-cell {
   height: var(--cell-height);
+  position: relative;
 }
 
 .fixed-top-date {
@@ -92,8 +93,8 @@ li {
 
 :root {
   --cell-height: 80px;
-  --member-circle-width: 30px;
-  --member-circle-height: 30px;
+  --member-circle-width: 26px;
+  --member-circle-height: 26px;
 }
 
 .time-label {
@@ -104,6 +105,24 @@ li {
 .member {
   width: var(--member-circle-width);
   height: var(--member-circle-height);
-  font-size: 15px;
-  padding: 3px;
+  font-size: 14px;
+  padding: 2px;
+  z-index: 1px;
+}
+
+.participants {
+  position: absolute;
+  bottom: 5px;
+  left: 0px;
+  right: 0px;
+}
+
+.z-10 {
+  z-index: 10;
+  position: relative;
+}
+
+.alpha-dark-bg {
+  background-color: rgba(38, 44, 74, 0.5);
+  height: 100%;
 }

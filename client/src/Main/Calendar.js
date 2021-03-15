@@ -77,7 +77,10 @@ class Calendar extends Component {
           if (!this.state.members[participants[p]].pic) {
             renderParticipants.push(
               <div
-                className="rounded-circle member m-auto"
+                className="rounded-circle member"
+                key={`cell-${i * 48 + j}-m-${
+                  this.state.members[participants[p]].userId
+                }`}
                 style={{ backgroundColor: "#FFA142" }}
               >
                 {this.state.members[participants[p]].initial}
@@ -97,7 +100,7 @@ class Calendar extends Component {
           >
             {i === 0 && <p className="time-label">{currday.format("HH:mm")}</p>}
             {this.state.hover_cell === String(i * 48 + j) && (
-              <div className="mt-4">
+              <div className="pt-4 z-10 alpha-dark-bg">
                 <i
                   onClick={this.viewScheduleSettings}
                   className="bi bi-gear-fill mx-1"
@@ -109,7 +112,9 @@ class Calendar extends Component {
                 ></i>
               </div>
             )}
-            {renderParticipants}
+            <div className="participants d-flex justify-content-center">
+              {renderParticipants}
+            </div>
           </div>
         );
         currday.add(30, "minutes");
