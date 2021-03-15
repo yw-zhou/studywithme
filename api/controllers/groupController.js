@@ -47,6 +47,14 @@ exports.create_schedule = function (req, res) {
   });
 };
 
+exports.get_schedule_settings = function (req, res) {
+  Group.getScheduleSettings(req.query.scheduleId, function (err, groups) {
+    console.log(err);
+    if (err) return res.status(400).send({ error: true, message: err });
+    res.json(groups);
+  });
+};
+
 var assign_group = function (req, res, pack = null) {
   var new_assignment = new Assignment(req.body.group);
   Assignment.createAssignment(new_assignment, function (err, assignment) {

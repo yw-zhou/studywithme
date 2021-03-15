@@ -37,7 +37,17 @@ Group.getSchedules = function (groupId, result) {
   const end_day = moment().endOf("week").format("YYYY-MM-DD HH:mm:ss");
   console.log(start_day, end_day);
   sql.query(
-    `SELECT user, datetime FROM schedule WHERE groupId='${groupId}' AND datetime >= '${start_day}' AND datetime <= '${end_day}' ORDER BY datetime ASC;`,
+    `SELECT user, datetime, scheduleId FROM schedule WHERE groupId='${groupId}' AND datetime >= '${start_day}' AND datetime <= '${end_day}' ORDER BY datetime ASC;`,
+    function (err, res) {
+      if (err) result(err, null);
+      result(null, res);
+    }
+  );
+};
+
+Group.getScheduleSettings = function (scheduleId, result) {
+  sql.query(
+    `SELECT * FROM scheduleSettings WHERE scheduleId='${scheduleId}';`,
     function (err, res) {
       if (err) result(err, null);
       result(null, res);

@@ -45,6 +45,16 @@ class Calendar extends Component {
       });
   }
 
+  viewScheduleSettings(e) {
+    axios
+      .get(
+        `http://localhost:9000/group/getScheduleSettings?scheduleId=${e.target.id}`
+      )
+      .then((res) => {
+        this.setState({ scheduleSettings: res.data });
+      });
+  }
+
   createTable() {
     let week = [];
     const computed_width = this.tableContainer.current.offsetWidth / 7;
@@ -61,6 +71,7 @@ class Calendar extends Component {
           <p>{currday.format("MMM DD")}</p>
         </div>,
       ];
+      let scheduleId;
       for (let j = 0; j < 48; j++) {
         let participants = [];
         if (this.state.schedules[scheduleIndex] === null)
@@ -70,6 +81,7 @@ class Calendar extends Component {
           currday.isSame(this.state.schedules[scheduleIndex].datetime)
         ) {
           participants.push(this.state.schedules[scheduleIndex].user);
+          scheduleId = this.state.schedules[scheduleIndex].scheduleId;
           scheduleIndex++;
         }
         let renderParticipants = [];
@@ -78,7 +90,7 @@ class Calendar extends Component {
             renderParticipants.push(
               <div
                 className="rounded-circle member"
-                key={`cell-${i * 48 + j}-m-${
+                key={`${scheduleId}-${
                   this.state.members[participants[p]].userId
                 }`}
                 style={{ backgroundColor: "#FFA142" }}
@@ -102,8 +114,9 @@ class Calendar extends Component {
             {this.state.hover_cell === String(i * 48 + j) && (
               <div className="pt-4 z-10 alpha-dark-bg">
                 <i
-                  onClick={this.viewScheduleSettings}
+                  onClick={this.viewScheduleSettings.bind(this)}
                   className="bi bi-gear-fill mx-1"
+                  id={scheduleId}
                 ></i>
                 <i
                   onClick={this.assignSchedule.bind(this)}
