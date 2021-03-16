@@ -43,7 +43,7 @@ function ScheduleModal(props) {
         className={`btn btn-light mx-2 float-right`}
         type="button"
         id="button-addon2"
-        // onClick={join}
+        onClick={props.onCancel}
       >
         Cancel
       </button>

@@ -21,6 +21,7 @@ class Calendar extends Component {
         name: "Yi Wei Zhou",
       },
     },
+    renderScheduleModal: false,
   };
 
   componentDidMount() {
@@ -40,6 +41,7 @@ class Calendar extends Component {
   }
 
   assignSchedule(e, pnum) {
+    let scheduleId;
     //what about when schedule Id already exists???
     // const schedule = {
     //   groupId: this.props.groupId,
@@ -48,9 +50,8 @@ class Calendar extends Component {
     //   scheduleId: scheduleId,
     // };
     if (!pnum) {
-      this.setState({
-        ScheduleModal: ScheduleModal(),
-      });
+      scheduleId = uuidv4();
+      this.toggleScheduleModal(scheduleId);
     }
     // axios
     //   .post(`http://localhost:9000/group/createSchedule`, { schedule })
@@ -60,14 +61,11 @@ class Calendar extends Component {
     //   });
   }
 
-  viewScheduleSettings(e) {
-    axios
-      .get(
-        `http://localhost:9000/group/getScheduleSettings?scheduleId=${e.target.id}`
-      )
-      .then((res) => {
-        this.setState({ scheduleSettings: res.data });
-      });
+  toggleScheduleModal(rsm = "") {
+    this.setState({
+      renderScheduleModal: !this.state.renderScheduleModal,
+      selectedSchedule: rsm,
+    });
   }
 
   createTable() {
@@ -130,7 +128,7 @@ class Calendar extends Component {
             {this.state.hover_cell === String(i * 48 + j) && (
               <div className="pt-4 z-10 alpha-dark-bg">
                 <i
-                  onClick={this.viewScheduleSettings.bind(this)}
+                  onClick={(e) => this.toggleScheduleModal(e.target.id)}
                   className="bi bi-gear-fill mx-1"
                   id={scheduleId}
                 ></i>
@@ -172,7 +170,12 @@ class Calendar extends Component {
             this.state.schedules &&
             this.createTable()}
         </div>
-        {this.state.ScheduleModal}
+        {this.state.renderScheduleModal && (
+          <ScheduleModal
+            onCancel={this.toggleScheduleModal.bind(this)}
+            scheduleId={this.state.selectedSchedule}
+          />
+        )}
       </div>
     );
   }
