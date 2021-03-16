@@ -18,6 +18,7 @@
     "react-scripts": "4.0.1",
     "react-scroll-sync": "^0.8.0",
     "schema-utils": "^3.0.0",
+    "uuid": "^8.3.2",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

@@ -1,7 +1,6 @@
 "user strict";
 var sql = require("./db.js");
 var moment = require("moment");
-var uuid = require("uuid");
 
 //Task object constructor
 var Group = function (group) {
@@ -83,7 +82,7 @@ var Schedule = function (schedule) {
   this.groupId = schedule.groupId;
   this.user = schedule.user;
   this.datetime = schedule.date;
-  this.scheduleId = uuid.v4();
+  this.scheduleId = schedule.scheduleId;
 };
 
 Schedule.createSchedule = function (new_schedule, result) {

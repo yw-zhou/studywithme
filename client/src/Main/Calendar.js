@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./main.css";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
+import ScheduleModal from "./ScheduleModal";
 var moment = require("moment");
 
 // Think about how to pass user credentials securely to this site
@@ -12,7 +14,13 @@ class Calendar extends Component {
   }
   state = {
     //mock members
-    members: { "yiweizhou123@gmail.com": { pic: null, initial: "YZ" } },
+    members: {
+      "yiweizhou123@gmail.com": {
+        pic: null,
+        initial: "YZ",
+        name: "Yi Wei Zhou",
+      },
+    },
   };
 
   componentDidMount() {
@@ -31,18 +39,25 @@ class Calendar extends Component {
       });
   }
 
-  assignSchedule(e) {
-    const schedule = {
-      groupId: this.props.groupId,
-      user: this.props.userId,
-      date: e.target.id,
-    };
-    axios
-      .post(`http://localhost:9000/group/createSchedule`, { schedule })
-      .then((res) => {
-        console.log("setting schedules", res);
-        this.getSchedules();
+  assignSchedule(e, pnum) {
+    //what about when schedule Id already exists???
+    // const schedule = {
+    //   groupId: this.props.groupId,
+    //   user: this.props.userId,
+    //   date: e.target.id,
+    //   scheduleId: scheduleId,
+    // };
+    if (!pnum) {
+      this.setState({
+        ScheduleModal: ScheduleModal(),
       });
+    }
+    // axios
+    //   .post(`http://localhost:9000/group/createSchedule`, { schedule })
+    //   .then((res) => {
+    //     console.log("setting schedules", res);
+    //     this.getSchedules();
+    //   });
   }
 
   viewScheduleSettings(e) {
@@ -96,6 +111,7 @@ class Calendar extends Component {
                 style={{ backgroundColor: "#FFA142" }}
               >
                 {this.state.members[participants[p]].initial}
+                {/* figure out how to have the name show for only the modal section... */}
               </div>
             );
           }
@@ -119,7 +135,9 @@ class Calendar extends Component {
                   id={scheduleId}
                 ></i>
                 <i
-                  onClick={this.assignSchedule.bind(this)}
+                  onClick={(e) =>
+                    this.assignSchedule(e, renderParticipants.length)
+                  }
                   id={currday.format("YYYY-MM-DD HH:mm:SS")}
                   className="bi bi-person-plus-fill mx-1"
                 ></i>
@@ -154,6 +172,7 @@ class Calendar extends Component {
             this.state.schedules &&
             this.createTable()}
         </div>
+        {this.state.ScheduleModal}
       </div>
     );
   }

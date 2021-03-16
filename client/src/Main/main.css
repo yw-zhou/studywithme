@@ -126,3 +126,19 @@ li {
   background-color: rgba(38, 44, 74, 0.5);
   height: 100%;
 }
+
+.schedule-modal {
+  position: absolute;
+  min-width: 400px;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  max-height: 350px;
+  max-width: 500px;
+  z-index: 50;
+}
+
+.member-list {
+  height: 160px;
+}
