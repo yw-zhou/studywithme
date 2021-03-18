@@ -142,3 +142,18 @@ li {
 .member-list {
   height: 160px;
 }
+
+.table-container .bi-caret-left-fill,
+.table-container .bi-caret-right-fill {
+  position: fixed;
+  top: 12px;
+  z-index: 50;
+}
+
+.table-container .bi-caret-left-fill {
+  left: 0px;
+}
+
+.table-container .bi-caret-right-fill {
+  right: 0px;
+}

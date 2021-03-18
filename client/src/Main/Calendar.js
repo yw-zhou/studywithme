@@ -68,6 +68,16 @@ class Calendar extends Component {
     });
   }
 
+  turnPage(e) {
+    let deltaWeek = 1;
+    if (e.target.id == "left") deltaWeek = -1;
+    this.setState({
+      start_date: this.state.start_date.add(deltaWeek, "weeks"),
+    });
+    this.getSchedules();
+    console.log("clicked", deltaWeek);
+  }
+
   createTable() {
     let week = [];
     const computed_width = this.tableContainer.current.offsetWidth / 7;
@@ -166,6 +176,16 @@ class Calendar extends Component {
           className="d-flex overflow-auto table-container"
           ref={this.tableContainer}
         >
+          <i
+            className="bi bi-caret-left-fill"
+            id="left"
+            onClick={this.turnPage.bind(this)}
+          ></i>
+          <i
+            className="bi bi-caret-right-fill"
+            id="right"
+            onClick={this.turnPage.bind(this)}
+          ></i>
           {this.state.start_date !== undefined &&
             this.state.schedules &&
             this.createTable()}
