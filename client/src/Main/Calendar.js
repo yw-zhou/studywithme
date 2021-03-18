@@ -25,15 +25,17 @@ class Calendar extends Component {
   };
 
   componentDidMount() {
-    this.getSchedules();
     const start_date = moment().startOf("week");
     this.setState({ start_date: start_date });
+    this.getSchedules(start_date);
   }
 
-  getSchedules() {
+  getSchedules(start_date = null) {
     axios
       .get(
-        `http://localhost:9000/group/getSchedules?groupId=${this.props.groupId}`
+        `http://localhost:9000/group/getSchedules?groupId=${
+          this.props.groupId
+        }&startDate=${this.state.start_date || start_date}`
       )
       .then((res) => {
         this.setState({ schedules: res.data });
@@ -75,7 +77,6 @@ class Calendar extends Component {
       start_date: this.state.start_date.add(deltaWeek, "weeks"),
     });
     this.getSchedules();
-    console.log("clicked", deltaWeek);
   }
 
   createTable() {

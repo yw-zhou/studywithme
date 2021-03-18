@@ -31,9 +31,10 @@ Group.getGroupInfo = function (groupId, result) {
   );
 };
 
-Group.getSchedules = function (groupId, result) {
-  const start_day = moment().startOf("week").format("YYYY-MM-DD HH:mm:ss");
-  const end_day = moment().endOf("week").format("YYYY-MM-DD HH:mm:ss");
+Group.getSchedules = function (groupId, startDate, result) {
+  console.log(startDate);
+  const start_day = moment(startDate).format("YYYY-MM-DD HH:mm:ss");
+  const end_day = moment(startDate).endOf("week").format("YYYY-MM-DD HH:mm:ss");
   console.log(start_day, end_day);
   sql.query(
     `SELECT user, datetime, scheduleId FROM schedule WHERE groupId='${groupId}' AND datetime >= '${start_day}' AND datetime <= '${end_day}' ORDER BY datetime ASC;`,
