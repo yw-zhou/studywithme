@@ -46,9 +46,17 @@ class UserInfo extends Component {
   }
 
   updateAccountInfo() {
-    // axios.post(
-    //   `http://localhost:9000/group/getGroups?user=${this.props.email}`
-    // );
+    const updatedUser = {
+      id: this.state.userData.email,
+      intro: this.state.intro,
+      name: this.state.name,
+    };
+    axios
+      .post(
+        `http://localhost:9000/http://localhost:9000/createUser/update`,
+        updatedUser
+      )
+      .then(this.setState({ editUser: false }));
   }
 
   render() {
