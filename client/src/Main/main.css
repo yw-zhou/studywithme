@@ -1,8 +1,19 @@
 .side-info {
   width: 30%;
   height: 100%;
-  max-width: 300px;
-  min-width: 200px;
+  max-width: 360px;
+  min-width: 260px;
+}
+
+.username {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.bi-gear-fill:hover,
+.bi-person-plus-fill:hover {
+  cursor: pointer;
 }
 
 #profilePic {
@@ -28,6 +39,10 @@
 .create-group-form {
   z-index: 10;
   position: relative;
+}
+
+.font-size-14 {
+  font-size: 14;
 }
 
 .create-group-form {
